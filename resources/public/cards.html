@@ -83,11 +83,15 @@ pre {
 
 /* This sets the color for input nodes to a light blue green. */
 g.type-input > rect {
-  fill: #00ffd0;
+  fill:	#C6F5B8;
+}
+
+g.type-function > rect {
+  fill: #B8E5F5;
 }
 
 g.type-output > rect {
-  fill: red;
+  fill: #F5F7D0;
 }
 
 
@@ -108,17 +112,9 @@ text {
   stroke-width: 1.5px;
 }
 
-/* This styles the title of the tooltip */
-.tipsy .name {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #60b1fc;
-  margin: 0;
-}
-
-/* This styles the body of the tooltip */
 .tipsy .catalog {
-  font-size: 1.2em;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 10px;
   text-align: left;
 }
 
@@ -135,9 +131,10 @@ var g = new dagreD3.graphlib.Graph()
 
 // Here we"re setting nodeclass, which is used by our custom drawNodes function
 // below.
-g.setNode(":read-ledger-4",  {description: "whatwhat", label: ":read-ledger-4", class: "type-input" });
-g.setNode(":annotate-job",  { label: ":annotate-job", class: "type-function" });
-g.setNode(":persist",  { label: ":persist", class: "type-output" });
+console.log(g);
+g.setNode(":read-ledger-4",  {});
+//g.setNode(":annotate-job",  { label: ":annotate-job", class: "type-function" });
+//g.setNode(":persist",  { label: ":persist", class: "type-output" });
 
 g.nodes().forEach(function(v) {
   var node = g.node(v);
@@ -146,8 +143,8 @@ g.nodes().forEach(function(v) {
 });
 
 // Set up edges, no special attributes.
-g.setEdge(":read-ledger-4", ":annotate-job");
-g.setEdge(":annotate-job", ":persist");
+//g.setEdge(":read-ledger-4", ":annotate-job");
+//g.setEdge(":annotate-job", ":persist");
 
 // Create the renderer
 var render = new dagreD3.render();
@@ -160,6 +157,7 @@ var inner = d3.select("#svg-canvas g");
 
 // Run the renderer. This is what draws the final graph.
 render(inner, g);
+/*
 
 // Simple function to style the tooltip for the given node.
 var styleTooltip = function(name, description) {
@@ -173,10 +171,13 @@ var styleTooltip = function(name, description) {
 inner.selectAll("g.node")
   .attr("title", function(v) { return styleTooltip(v, g.node(v).description) })
   .each(function(v) { $(this).tipsy({ gravity: "w", opacity: 1, html: true }); });
+  */
+
+//alert(g.graph().width);
+console.log(g.graph());
 
 // Center the graph
 var xCenterOffset = (svg.attr("width") - g.graph().width) / 2;
-alert(xCenterOffset);
 svgGroup.attr("transform", "translate(" + xCenterOffset + ", 20)");
 svg.attr("height", g.graph().height + 40);
 });
