@@ -5,8 +5,6 @@
 
 (enable-console-print!)
 
-(def Graph (.-Graph (.-graphlib js/dagreD3)))
-        
 (def job
   {:workflow [[:read-ledger-3 :unwrap]
               [:read-ledger-4 :unwrap]
@@ -130,10 +128,9 @@
                :trigger/on :onyx.triggers.triggers/segment,
                :trigger/threshold [1 :elements],
                :trigger/sync :onyx-peers.functions.functions/update-state-log}],
-   :lifecycles [(comment ... lifecycles elided for brevity)]}
-
-
-  )
+   :lifecycles [(comment ... lifecycles elided for brevity)]})
+        
+(def Graph (.-Graph (.-graphlib js/dagreD3)))
         
 (defn task-class [task]
   (case (:onyx/type task)
@@ -184,7 +181,8 @@
 
     (doall
       (for [[t1 t2] (:workflow job)]
-        (.setEdge g (str t1) (str t2))))
+        ;; TODO: add flow condition connections here
+        (.setEdge g (str t1) (str t2) #js {})))
 
     (let [R (.-render js/dagreD3)
           render (R.)
@@ -201,66 +199,6 @@
                    (.tipsy (js/$ (js* "this")) #js {:gravity "w" 
                                                     :opacity 1 
                                                     :html true})))))))
-
-; inner.selectAll("g.node")
-;   .attr("title", function(v) { return styleTooltip(v, g.node(v).description) })
-;   .each(function(v) { $(this).tipsy({ gravity: "w", opacity: 1, html: true }); });
-
-
-
-
-; // Create the input graph
-; var g = new dagreD3.graphlib.Graph()
-;   .setGraph({})
-;   .setDefaultEdgeLabel(function() { return {}; });
-
-; // Here we"re setting nodeclass, which is used by our custom drawNodes function
-; // below.
-; g.setNode(":read-ledger-4",  {description: "whatwhat", label: ":read-ledger-4", class: "type-input" });
-; g.setNode(":annotate-job",  { label: ":annotate-job", class: "type-function" });
-; g.setNode(":persist",  { label: ":persist", class: "type-output" });
-
-; g.nodes().forEach(function(v) {
-;   var node = g.node(v);
-;   // Round the corners of the nodes
-;   node.rx = node.ry = 5;
-; });
-
-; // Set up edges, no special attributes.
-; g.setEdge(":read-ledger-4", ":annotate-job");
-; g.setEdge(":annotate-job", ":persist");
-
-; // Create the renderer
-; var render = new dagreD3.render();
-
-; // Set up an SVG group so that we can translate the final graph.
-; var svg = d3.select("#svg-canvas"),
-;     svgGroup = svg.append("g");
-
-; var inner = d3.select("#svg-canvas g");
-
-; // Run the renderer. This is what draws the final graph.
-; render(inner, g);
-
-; // Simple function to style the tooltip for the given node.
-; var styleTooltip = function(name, description) {
-;   return "<p class='name'>" + name + "</p><p class='catalog'>" +
-;   "<table><tbody><tr><td class='catalog'>{:onyx/name :in</td></tr><tr><td> :onyx/plugin :onyx.plugin.core-async/input </td></tr></tbody></table>"
-;   //+ description + 
-;   +
-;   "</p>";
-; };
-
-; inner.selectAll("g.node")
-;   .attr("title", function(v) { return styleTooltip(v, g.node(v).description) })
-;   .each(function(v) { $(this).tipsy({ gravity: "w", opacity: 1, html: true }); });
-
-; // Center the graph
-; var xCenterOffset = (svg.attr("width") - g.graph().width) / 2;
-; alert(xCenterOffset);
-; svgGroup.attr("transform", "translate(" + xCenterOffset + ", 20)");
-; svg.attr("height", g.graph().height + 40);
-
 
 (defn dagre [data owner]
   (reify
