@@ -16,6 +16,7 @@
                  [cljsjs/react "0.14.3-0"]
                  [cljsjs/react-dom "0.14.3-1"]
                  [cljsjs/react-dom-server "0.14.3-0"]
+                 [fence "0.2.0"]
 
                  [org.omcljs/om "0.9.0"]
                  #_[reagent "0.5.1"]]
