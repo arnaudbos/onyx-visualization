@@ -1,6 +1,6 @@
 (defproject org.onyxplatform/onyx-viz "0.1.0-SNAPSHOT"
-  :description "FIXME: write this!"
-  :url "http://example.com/FIXME"
+  :description "Visualization for Onyx"
+  :url "https://github.com/lbradstreet/onyx-viz"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
