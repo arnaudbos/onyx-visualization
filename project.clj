@@ -48,7 +48,7 @@
                                    :source-map-timestamp true }}
                        {:id "prod"
                         :source-paths ["src"]
-                        :compiler {:main       "onyx-viz.core"
+                        :compiler {:main       "onyx-viz.core-cards"
                                    :asset-path "js/compiled/out"
                                    :output-to  "resources/public/js/compiled/onyx_viz.js"
                                    :optimizations :advanced}}]}
