@@ -1,6 +1,6 @@
 (defproject org.onyxplatform/onyx-visualization "0.1.0"
   :description "Visualization for Onyx"
-  :url "https://github.com/lbradstreet/onyx-viz"
+  :url "https://github.com/lbradstreet/onyx-visualization"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
