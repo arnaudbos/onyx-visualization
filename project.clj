@@ -1,4 +1,4 @@
-(defproject org.onyxplatform/onyx-viz "0.1.0-SNAPSHOT"
+(defproject org.onyxplatform/onyx-visualization "0.1.0"
   :description "Visualization for Onyx"
   :url "https://github.com/lbradstreet/onyx-viz"
   :license {:name "Eclipse Public License"
