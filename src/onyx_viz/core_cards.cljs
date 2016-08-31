@@ -127,9 +127,9 @@
         
 (defcard-om first-card
   c/job-dag
-  {:job job :width 960 :height 480})
+  {:job job :width 900 :height 480})
 
-(def app-state (atom {:job job :width 960 :height 480}))
+(def app-state (atom {:job job :width 900 :height 480}))
 
 (defn main []
   ;; conditionally start the app based on whether the #main-app-area
