@@ -73,12 +73,29 @@
             inner (+++ (.select js/d3 "#svg-canvas g"))
             _ (render inner g)
             center-offset (+++ (/ (- (.attr svg "width") (.-width (.graph g))) 2))]
-        (+++ (.attr svg-group "transform" (str "translate(" center-offset ", 20)")))
+        ; commented centering graph because of flick when first zoom event applied
+        ; due to first zoom event is based on 0,0 instead of center point
+        #_(+++ (.attr svg-group "transform" (str "translate(" center-offset ", 20)")))
         (+++ (.attr svg "height" (+ (.-height (.graph g)) 40)))
         (+++ (.each (.attr (.selectAll inner "g.node")
                            "title" 
                            #(style-tooltip task-name->entry %))
-                    add-tipsy)))))
+                    add-tipsy))
+        ; do not wrap by +++ macro because of error
+        ; add zoom behaviour
+        (-> svg 
+            (.call (-> js/d3
+                   (.-behavior)
+                   (.zoom)
+                   (.on "zoom" (fn []
+                              (.attr svg-group "transform"
+                                               (str "translate("
+                                                    (.. js/d3 -event -translate)
+                                                    ") scale("
+                                                    (.. js/d3 -event -scale)
+                                                    ")")))))))
+          
+        )))
 
 (defn job-dag [{:keys [job width height]} owner]
   (reify
