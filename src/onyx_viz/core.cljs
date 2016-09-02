@@ -83,19 +83,15 @@
                     add-tipsy))
         ; do not wrap by +++ macro because of error
         ; add zoom behaviour
-        (-> svg 
-            (.call (-> js/d3
-                   (.-behavior)
-                   (.zoom)
-                   (.on "zoom" (fn []
-                              (.attr svg-group "transform"
-                                               (str "translate("
-                                                    (.. js/d3 -event -translate)
-                                                    ") scale("
-                                                    (.. js/d3 -event -scale)
-                                                    ")")))))))
-          
-        )))
+        (+++ (.call svg
+                    (.on (.zoom (.-behavior js/d3))
+                         "zoom" (fn []
+                                  (.attr svg-group "transform"
+                                         (str "translate("
+                                              (.. js/d3 -event -translate)
+                                              ") scale("
+                                              (.. js/d3 -event -scale)
+                                              ")")))))))))
 
 (defn job-dag [{:keys [job width height]} owner]
   (reify
