@@ -66,32 +66,34 @@
           ;; TODO: add flow condition connections here
           (+++ (.setEdge g (str t1) (str t2) #js {}))))
 
-      (let [R (+++ (.-render js/dagreD3))
-            render (R.)
-            svg (+++ (.select js/d3 "#svg-canvas"))
-            svg-group (+++ (.append svg "g"))
-            inner (+++ (.select js/d3 "#svg-canvas g"))
-            _ (render inner g)
-            center-offset (+++ (/ (- (.attr svg "width") (.-width (.graph g))) 2))]
+      (let [R         (+++ (.-render js/dagreD3))
+            render    (R.)
+            svg       (-> js/d3 (.select "#svg-canvas"))
+            svg-group (-> svg (.append "g"))
+            inner     (-> js/d3 (.select "#svg-canvas g"))
+            _         (render inner g)
+            ; center-offset (+++ (/ (- (.attr svg "width") (.-width (.graph g))) 2))
+            ]
         ; commented centering graph because of flick when first zoom event applied
         ; due to first zoom event is based on 0,0 instead of center point
-        #_(+++ (.attr svg-group "transform" (str "translate(" center-offset ", 20)")))
+        ; (+++ (.attr svg-group "transform" (str "translate(" center-offset ", 20)")))
+        
         (+++ (.attr svg "height" (+ (.-height (.graph g)) 40)))
         (+++ (.each (.attr (.selectAll inner "g.node")
                            "title" 
                            #(style-tooltip task-name->entry %))
                     add-tipsy))
-        ; do not wrap by +++ macro because of error
+
         ; add zoom behaviour
-        (+++ (.call svg
-                    (.on (.zoom (.-behavior js/d3))
-                         "zoom" (fn []
-                                  (.attr svg-group "transform"
-                                         (str "translate("
-                                              (.. js/d3 -event -translate)
-                                              ") scale("
-                                              (.. js/d3 -event -scale)
-                                              ")")))))))))
+        (-> svg 
+            (.call (-> (js/d3.behavior.zoom)
+                       (.on "zoom" (fn  []
+                                        (.attr svg-group "transform"
+                                                         (str "translate("
+                                                              js/d3.event.translate
+                                                              ") scale("
+                                                              js/d3.event.scale
+                                                              ")"))))))))))
 
 (defn job-dag [{:keys [job width height]} owner]
   (reify
