@@ -51,6 +51,7 @@
                         :compiler {:main       "onyx-viz.core-cards"
                                    :asset-path "js/compiled/out"
                                    :output-to  "resources/public/js/compiled/onyx_viz.js"
-                                   :optimizations :advanced}}]}
+                                   :optimizations :advanced
+                                   :externs ["src/js/d3-externs.js"]}}]}
 
   :figwheel { :css-dirs ["resources/public/css"] })
