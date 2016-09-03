@@ -4,8 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/css/onyx_viz_style.css" rel="stylesheet" type="text/css">
+
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="http://cpettitt.github.io/project/dagre-d3/v0.3.0/dagre-d3.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link rel="stylesheet" href="css/tipsy.css">
+    <script src="js/tipsy.js"></script>
   </head>
   <body>
+  <style id="css">
+body {
+  width: 960px;
+  margin: 0 auto;
+  color: #333;
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+}
+
+h1 {
+  font-size: 3em;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 300;
+}
+
+section {
+  margin-bottom: 3em;
+}
+
+section p {
+  text-align: justify;
+}
+
+svg {
+  border: 1px solid #ccc;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+pre {
+  border: 1px solid #ccc;
+}
+
+
+/* This sets the color for input nodes to a light blue green. */
+g.type-input > rect {
+  fill:	#C6F5B8;
+}
+
+g.type-function > rect {
+  fill: #B8E5F5;
+}
+
+g.type-output > rect {
+  fill: #F5F7D0;
+}
+
+
+text {
+  font-weight: 300;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serf;
+  font-size: 14px;
+}
+
+.node rect {
+  stroke: #999;
+  fill: #fff;
+  stroke-width: 1.5px;
+}
+
+.edgePath path {
+  stroke: #333;
+  stroke-width: 1.5px;
+}
+
+.tipsy .catalog {
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 10px;
+  text-align: left;
+}
+
+</style>
     <div id="main-app-area"></div>
     <script src="/js/compiled/onyx_viz.js" type="text/javascript"></script>
   </body>
