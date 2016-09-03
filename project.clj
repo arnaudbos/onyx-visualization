@@ -52,6 +52,6 @@
                                    :asset-path "js/compiled/out"
                                    :output-to  "resources/public/js/compiled/onyx_viz.js"
                                    :optimizations :advanced
-                                   :externs ["src/js/d3-externs.js"]}}]}
+                                   :externs ["src/js/d3_externs.js"]}}]}
 
   :figwheel { :css-dirs ["resources/public/css"] })
