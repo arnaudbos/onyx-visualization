@@ -11,7 +11,9 @@
   (case (:onyx/type task)
     :input "type-input"
     :function "type-function"
-    :output "type-output"))
+    :reduce "type-function"
+    :output "type-output"
+    ""))
 
 ;; TODO: switch this to sablono and render to html
 (defn style-tooltip [task-name->entry name]
