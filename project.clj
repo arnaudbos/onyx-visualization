@@ -1,4 +1,4 @@
-(defproject org.onyxplatform/onyx-visualization "0.4.0"
+(defproject org.onyxplatform/onyx-visualization "0.5.0"
   :description "Visualization for Onyx"
   :url "https://github.com/lbradstreet/onyx-visualization"
   :license {:name "MIT"
